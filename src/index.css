@@ -12,16 +12,3 @@ code {
     monospace;
 }
 
-.banner_section{
-  /* background-color: black; */
-  /* height: 50rem; */
-  background-image: url(./images/banner.png);
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-
-.inside_banner{
-  height: 100vh;
-  border: 2px solid black;
-}
