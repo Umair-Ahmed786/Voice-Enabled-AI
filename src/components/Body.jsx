@@ -77,8 +77,6 @@ export default function Body() {
     setexpression(local_result);
   };
 
-  // useEffect(() => {compute();},[expression]);
-
 
   const sum = (a, b) => {
     return a + b;
@@ -141,10 +139,7 @@ export default function Body() {
           {/* 1st row started */}
           <div className="row my-3">
 
-            {/* <div className="col " style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', border: '2px solid yellow' }}>
-              <button className='btn btn-sm' onClick={handle_C} style={{ backgroundColor: 'gray', color: 'white', borderRadius: '50px', paddingLeft: '2rem', paddingRight: '2rem', fontSize: '1.2rem', marginRight: '10.5rem', marginLeft: '15.8rem' }}> <b>C</b></button>
-              <button className='btn btn-sm'  style={{ backgroundColor: 'gray', color: 'white', borderRadius: '50px', paddingLeft: '2rem', paddingRight: '2rem', fontSize: '1.2rem', marginRight: '19.5rem' }}> <b>&lt;-</b></button>
-            </div> */}
+    
 
             <div className="col " style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
 
