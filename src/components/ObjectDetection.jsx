@@ -3,13 +3,25 @@ import dot from "../images/dot.gif";
 
 import Image from 'react-bootstrap/Image';
 
-function ObjectDetection() {
-    const [objectCounts, setObjectCounts] = useState({});
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [imageurl, setimageurl] = useState(null)
-    const [history, sethistory] = useState([])
-    const [loading, setloading] = useState(false)
-    const imgref = useRef();
+function ObjectDetection({
+    objectCounts,
+    setObjectCounts,
+    selectedFile,
+    setSelectedFile,
+    imageurl,
+    setimageurl,
+    history,
+    sethistory,
+    loading,
+    setloading,
+    imgref
+}) {
+    // const [objectCounts, setObjectCounts] = useState({});
+    // const [selectedFile, setSelectedFile] = useState(null);
+    // const [imageurl, setimageurl] = useState(null)
+    // const [history, sethistory] = useState([])
+    // const [loading, setloading] = useState(false)
+    // const imgref = useRef();
 
 
     const handleFileChange = (event) => {
@@ -82,8 +94,8 @@ function ObjectDetection() {
     return (
         <>
 
-            <div className="container-fluid">
-                <div className="row text-center py-2" style={{ backgroundColor: 'yellow' }}>
+            <div className="container-fluid mt-5">
+                <div className="row text-center pt-2" style={{ backgroundColor: 'yellow' }}>
                     <h1>Image Identification</h1>
                 </div>
 
@@ -103,29 +115,29 @@ function ObjectDetection() {
                 <div className="row my-5">
                     <div className="col-lg-6 col-md-6">
                         {
-                            imageurl && 
-                            <Image className='img-responsive img-fluid' src={imageurl} alt="image" rounded/>
+                            imageurl &&
+                            <Image className='img-responsive img-fluid' src={imageurl} alt="image" rounded />
                         }
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-6" style={{ alignContent: 'center' }}>
                         {
                             loading ? <img src={dot} alt="loaing" style={{ width: '50%' }} /> :
-                                <ul style={{fontSize: '2rem', width: '50%'}}>
+                                <ul style={{ fontSize: '2rem', width: '50%' }}>
                                     {Object.entries(objectCounts).map(([className, count]) => (
-                                        <li key={className} style={{border: '3px solid black', borderRadius: '50px', textAlign: 'center', backgroundColor: 'yellow', marginTop: '2px', fontWeight: '500'}}>
+                                        <li key={className} style={{ border: '3px solid black', borderRadius: '50px', textAlign: 'center', backgroundColor: 'yellow', marginTop: '2px', fontWeight: '500' }}>
                                             {className.toUpperCase()}: {count}
                                         </li>
                                     ))}
                                 </ul>
                         }
 
-                        
+
                     </div>
                 </div>
 
-                
-        
+
+
 
 
 
@@ -147,12 +159,12 @@ function ObjectDetection() {
                         <h1>Recent Images</h1>
                         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
                             {history.map((image, index) => (
-                                <div key={`${image}${index}`} style={{width: '15%', boxSizing: 'border-box', padding: '5px' }}>
+                                <div key={`${image}${index}`} style={{ width: '15%', boxSizing: 'border-box', padding: '5px' }}>
                                     <img
                                         src={generate_url(image)}
                                         className='img-fluid'
                                         alt="image"
-                                        style={{ width: '100%', height: 'auto'}}
+                                        style={{ width: '100%', height: 'auto' }}
                                         onClick={() => { setimageurl(generate_url(image)); setSelectedFile(image) }}
                                     />
                                 </div>

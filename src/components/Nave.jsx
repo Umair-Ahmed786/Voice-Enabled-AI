@@ -8,7 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 export default function Nave() {
   return (
-    <Navbar expand="lg" variant="dark" bg="dark">
+    <Navbar expand="lg" variant="dark" bg="dark" fixed="top">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">Voice GPT</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -17,7 +17,7 @@ export default function Nave() {
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
             <Nav.Link as={Link} to="/detection">Object Detection</Nav.Link>
           </Nav>
-         
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

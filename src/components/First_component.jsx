@@ -13,15 +13,32 @@ const { CohereClient } = require('cohere-ai');
 const recognition = new window.webkitSpeechRecognition();
 
 
-function First_component() {
-  const [inputValue, setInputValue] = useState('');
-  const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
-  const [chatHistory, setChatHistory] = useState('');
-  const [isloading, setisloading] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-  const [isspeaking, setspeaking] = useState(false);
-  const [speed, setspeed] = useState(4);
+function First_component({
+  inputValue,
+  setInputValue,
+  questions,
+  setQuestions,
+  answers,
+  setAnswers,
+  chatHistory,
+  setChatHistory,
+  isloading,
+  setisloading,
+  isListening,
+  setIsListening,
+  isspeaking,
+  setspeaking,
+  speed,
+  setspeed
+}) {
+  // const [inputValue, setInputValue] = useState('');
+  // const [questions, setQuestions] = useState([]);
+  // const [answers, setAnswers] = useState([]);
+  // const [chatHistory, setChatHistory] = useState('');
+  // const [isloading, setisloading] = useState(false);
+  // const [isListening, setIsListening] = useState(false);
+  // const [isspeaking, setspeaking] = useState(false);
+  // const [speed, setspeed] = useState(4);
 
   const handleSubmit = async () => {
 
@@ -152,13 +169,13 @@ function First_component() {
   return (
     <>
       <div
-        className="container"
+        className="container mt-5"
         style={{
           display: 'flex',
           // justifyContent: 'center',
           flexDirection: 'column',
           minHeight: '100vh',
-          // border: '2px solid black',
+          border: '2px solid black',
         }}
       >
 
@@ -212,7 +229,7 @@ function First_component() {
               // border: '2px solid black',
             }}
           >
-            <h4 className='pb-4'>Your Responses:</h4>
+            <h4 className='py-4'>Your Responses:</h4>
             {questions.map((question, index) => (
               <div key={index}>
                 <p style={{ textAlign: 'justify' }}> <img src={user} alt="cohere" style={{ height: '2rem' }} /> <b>You:</b> <div style={{ paddingLeft: '2.3rem', textAlign: 'justify' }}> {question}</div></p>
