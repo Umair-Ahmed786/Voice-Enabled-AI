@@ -124,7 +124,7 @@ function Describe() {
         <div className="row">
 
           {/* col number 1 */}
-          <div className="col col-lg-9 col-sm-12 col-md-8">
+          <div className="col col-lg-9 col-sm-12 col-md-12">
 
             <div
               className="container mt-5"
@@ -262,7 +262,7 @@ function Describe() {
           </div>
           {/* col number 1 ended */}
 
-          <div className="col col-lg-3 col-sm-12 col-md-4" style={{ background: 'rgb(39, 38, 38)'}}>
+          <div className="col col-lg-3 col-sm-12 col-md-12" style={{ background: 'rgb(39, 38, 38)'}}>
                      {/* history row started */}
              <div className="container pt-3">
                <h1 className='pt-5' style={{color: 'white'}}>Recent Images</h1>
