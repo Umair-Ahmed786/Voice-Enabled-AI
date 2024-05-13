@@ -1,38 +1,55 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import dot from "../images/dot.gif";
-
 import Image from 'react-bootstrap/Image';
 
-function ObjectDetection({
-    objectCounts,
-    setObjectCounts,
-    selectedFile,
-    setSelectedFile,
-    imageurl,
-    setimageurl,
-    history,
-    sethistory,
-    loading,
-    setloading,
-    imgref
-}) {
+function ObjectDetection() {
+    const [objectCounts, setObjectCounts] = useState({});
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [imageurl, setimageurl] = useState(null);
+    const [history, sethistory] = useState([]);
+    const [loading, setloading] = useState(false);
+    const [showWebcam, setShowWebcam] = useState(false);
+    const webcamRef = useRef(null);
 
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        setSelectedFile(file);
-        setObjectCounts({})
-        if (file) {
-            // const url = URL.createObjectURL(file);
-            setimageurl(generate_url(file));
-            sethistory([file, ...history]);
-        }
-    };
 
     const generate_url = (image) => {
-        const url = URL.createObjectURL(image)
-        return url
-    }
+        const url = URL.createObjectURL(image);
+        return url;
+    };
 
+    const enableWebcam = () => {
+        setShowWebcam(true);
+        try{
+
+            navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+                webcamRef.current.srcObject = stream;
+            });
+        }catch(e){
+            console.log("image was not captured")
+        }
+
+    };
+
+    const captureImage = () => {
+        setObjectCounts({})
+        try{
+
+            const canvas = document.createElement('canvas');
+            canvas.width = webcamRef.current.videoWidth;
+            canvas.height = webcamRef.current.videoHeight;
+            canvas.getContext('2d').drawImage(webcamRef.current, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob((blob) => {
+                const file = new File([blob], 'webcam-image.png');
+                setSelectedFile(file);
+                sethistory([file,...history])
+                setimageurl(generate_url(file));
+                setShowWebcam(false);
+                webcamRef.current.srcObject.getTracks().forEach((track) => track.stop());
+            }, 'image/png');
+        }catch(e){
+            console.log("Image was not captured")
+        }
+    };
 
     const detect = () => {
         const fetchData = async () => {
@@ -84,36 +101,29 @@ function ObjectDetection({
         // setloading(false)
     };
 
-
     return (
         <>
-
             <div className="container-fluid mt-5">
-                <div className="row text-center pt-4" style={{ }}>
-                    <h1>Image Identification</h1>
+                <div className="row text-center pt-2" >
+                    <h1>Live Image Identification</h1>
                 </div>
 
-                {/* 2nd row  */}
+
                 <div className="row  my-3">
-                    <input type="file" onChange={handleFileChange} ref={imgref} style={{ height: 0, width: 0, visibility: 'hidden' }} />
-                    
-                    
-                    <div>
-
-                        <button className='btn btn-lg btn-warning' disabled={loading} onClick={() => imgref.current.click()}>Upload Image</button>
-                    </div>
-
-
-
+               <div>
+               <button className='btn btn-lg btn-warning' onClick={showWebcam ? captureImage : enableWebcam}>
+                            {showWebcam ? 'Capture Image' : 'Enable Webcam'}
+                 </button>
+               </div>
                 </div>
 
-                {/* 3rd row  */}
-                <div className="row my-5">
+                <div className="row my-3">
                     <div className="col-lg-6 col-md-6">
-                        {
-                            imageurl &&
-                            <Image className='img-responsive img-fluid' src={imageurl} alt="image" rounded />
-                        }
+                        {showWebcam ? (
+                            <video ref={webcamRef} autoPlay muted style={{ width: '100%', height: 'auto' }} />
+                        ) : (
+                            imageurl && <Image className='img-responsive img-fluid' src={imageurl} alt="image" rounded />
+                        )}
                     </div>
 
                     <div className="col-lg-6 col-md-6 col-sm-6" style={{ alignContent: 'center' }}>
@@ -122,7 +132,7 @@ function ObjectDetection({
                                 <ul style={{ fontSize: '2rem', width: '50%' }}>
                                     {Object.entries(objectCounts).map(([className, count]) => (
                                         <li key={className} style={{ border: '3px solid black', borderRadius: '50px', textAlign: 'center', backgroundColor: 'yellow', marginTop: '2px', fontWeight: '500' }}>
-                                           <h2> {className.toUpperCase()}: {count} </h2> 
+                                            {className.toUpperCase()}: {count}
                                         </li>
                                     ))}
                                 </ul>
@@ -132,25 +142,19 @@ function ObjectDetection({
                     </div>
                 </div>
 
-
-
-
-
-
-                {/* 4rth row  */}
                 <div className="row">
                     <div>
 
-                        <button className='btn btn-lg btn-warning' disabled={!selectedFile || loading} onClick={detect}>Detect Object</button>
+                        <button className='btn btn-lg btn-warning' disabled={!selectedFile || loading || showWebcam} onClick={detect}>Detect Object</button>
                     </div>
                 </div>
 
+                {/* Remaining code for object detection, history, etc. */}
+                 {/* fifth row */}
 
-                {/* fifth row */}
 
 
-
-                {history.length > 0 && (
+                 {history.length > 0 && (
                     <div className='row mt-5' style={{ backgroundColor: 'yellow' }}>
                         <h1>Recent Images</h1>
                         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
@@ -169,14 +173,7 @@ function ObjectDetection({
                         </div>
                     </div>
                 )}
-
-
-
-
-
-
             </div>
-
         </>
     );
 }

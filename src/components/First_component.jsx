@@ -175,7 +175,7 @@ function First_component({
           // justifyContent: 'center',
           flexDirection: 'column',
           minHeight: '100vh',
-          border: '2px solid black',
+          // border: '2px solid black',
         }}
       >
 
@@ -202,7 +202,7 @@ function First_component({
                 margintop: '0'
               }}
             >
-              Welcome to Voice GPT
+              Voice Enabled AI
 
               {/* speak button started */}
             </h3>
@@ -233,7 +233,7 @@ function First_component({
             {questions.map((question, index) => (
               <div key={index}>
                 <p style={{ textAlign: 'justify' }}> <img src={user} alt="cohere" style={{ height: '2rem' }} /> <b>You:</b> <div style={{ paddingLeft: '2.3rem', textAlign: 'justify' }}> {question}</div></p>
-                {answers[index] && <p className='' style={{ marginBottom: '5rem' }}> <b><img src={cohere} alt="cohere" style={{ height: '2rem' }} />Voice-GPT:</b> <div style={{ paddingLeft: '2.2rem', textAlign: 'justify' }}>{answers[index]}</div> </p>}
+                {answers[index] && <p className='' style={{ marginBottom: '5rem' }}> <b><img src={cohere} alt="cohere" style={{ height: '2rem' }} />AI:</b> <div style={{ paddingLeft: '2.2rem', textAlign: 'justify' }}>{answers[index]}</div> </p>}
               </div>
             ))}
 
@@ -243,7 +243,7 @@ function First_component({
 
               {isloading && <div>
                 <p style={{ textAlign: 'justify' }}> <img src={user} alt="cohere" style={{ height: '2rem' }} /> <b>You:</b> <div style={{ paddingLeft: '2.3rem', textAlign: 'justify' }}> <p></p>{inputValue}</div></p>
-                {<p style={{ marginBottom: '5rem' }}> <b><img src={cohere} alt="cohere" style={{ height: '2rem' }} />Voice-GPT:</b> <div style={{ paddingLeft: '2.2rem', textAlign: 'justify' }}><img src={text_load} style={{ width: '20rem', marginBottom: '5rem', width: '5rem' }} alt="loading" /></div> </p>}
+                {<p style={{ marginBottom: '5rem' }}> <b><img src={cohere} alt="cohere" style={{ height: '2rem' }} />AI:</b> <div style={{ paddingLeft: '2.2rem', textAlign: 'justify' }}><img src={text_load} style={{ width: '20rem', marginBottom: '5rem', width: '5rem' }} alt="loading" /></div> </p>}
               </div>}
 
             </div>

@@ -6,6 +6,9 @@ import Nave from './components/Nave';
 import ObjectDetection from './components/ObjectDetection';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import Routes
 import { useRef, useState } from 'react';
+import Webcame1 from './components/Webcame1';
+import Describe from './components/Describe';
+
 
 
 function App() {
@@ -29,14 +32,24 @@ function App() {
   const [loading, setloading] = useState(false)
   const imgref = useRef();
   // Object detection states Ended
+
+  // webcame started 
+  //  const [objectCounts_webcame, setObjectCounts_webcame] = useState({});
+  //   const [selectedFile_webcame, setSelectedFile_webcame] = useState(null);
+  //   const [imageurl_webcame, setimageurl_webcame] = useState(null);
+  //   const [history_webcame, sethistory_webcame] = useState([]);
+  //   const [loading_webcame, setloading_webcame] = useState(false);
+    // const webcamRef = useRef(null);
+    // webcame ended
   return (
     <>
 
       <Router>
         <Nave />
-        <Routes> {/* Use Routes instead of Route */}
-          {/* <Route path="/" element={<First_component inputValue={inputValue} setInputValue={setInputValue} />} /> Wrap Route in Routes and use 'element' prop */}
-          {/* <Route path="/home" element={<First_component />} /> Wrap Route in Routes and use 'element' prop */}
+        <Routes>
+
+          {/* <Route path="/" element={<First_component */}
+          {/* function to add 2 number */}
           <Route path="/" element={<First_component
             inputValue={inputValue}
             setInputValue={setInputValue}
@@ -73,20 +86,57 @@ function App() {
             speed={speed}
             setspeed={setspeed} />}
           />
-          <Route path="/detection" element={<ObjectDetection
-            objectCounts={objectCounts}
-            setObjectCounts={setObjectCounts}
-            selectedFile={selectedFile}
-            setSelectedFile={setSelectedFile}
-            imageurl={imageurl}
-            setimageurl={setimageurl}
-            history={history}
-            sethistory={sethistory}
-            loading={loading}
-            setloading={setloading}
-            imgref={imgref}
-          />} />
-          {/* Add more routes here as needed */}
+
+
+
+
+
+          <Route
+            path="/detection"
+            element={
+              <ObjectDetection
+                objectCounts={objectCounts}
+                setObjectCounts={setObjectCounts}
+                selectedFile={selectedFile}
+                setSelectedFile={setSelectedFile}
+                imageurl={imageurl}
+                setimageurl={setimageurl}
+                history={history}
+                sethistory={sethistory}
+                loading={loading}
+                setloading={setloading}
+                imgref={imgref}
+              />
+            }
+          />
+
+<Route
+  path="/webcame"
+  element={
+    <Webcame1
+      // objectCounts_webcame={objectCounts_webcame}
+      // setObjectCounts_webcame={setObjectCounts_webcame}
+      // selectedFile_webcame={selectedFile_webcame}
+      // setSelectedFile_webcame={setSelectedFile_webcame}
+      // imageurl_webcame={imageurl_webcame}
+      // setimageurl_webcame={setimageurl_webcame}
+      // history_webcame={history_webcame}
+      // sethistory_webcame={sethistory_webcame}
+      // loading_webcame={loading_webcame}
+      // setloading_webcame={setloading_webcame}
+      // webcamRef={webcamRef} // Pass webcamRef as a prop
+    />
+  }
+/>
+
+<Route
+  path="/image"
+  element={
+    <Describe
+    />
+  }
+/>
+
         </Routes>
       </Router>
 

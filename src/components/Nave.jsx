@@ -16,7 +16,10 @@ export default function Nave() {
           <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
             <Nav.Link as={Link} to="/home">Home</Nav.Link>
             <Nav.Link as={Link} to="/detection">Object Detection</Nav.Link>
+            <Nav.Link as={Link} to="/webcame">Live Detection</Nav.Link>
+            <Nav.Link as={Link} to="/image">Describe Image</Nav.Link>
           </Nav>
+         
 
         </Navbar.Collapse>
       </Container>
